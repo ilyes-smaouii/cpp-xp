@@ -2,6 +2,7 @@
 #include <chrono>
 #include <cstddef>
 #include <iostream>
+#include <mutex>
 #include <thread>
 #include <vector>
 
@@ -35,6 +36,9 @@ void countFunPlusEq(std::size_t count, std::size_t &counter,
     atomic_counter.fetch_add(1, std::memory_order_relaxed);
   }
 }
+
+std::mutex m{};
+auto ntt = m.native_handle();
 
 int main(int argc, char *argv[]) {
   std::vector<std::jthread> my_threads{};
